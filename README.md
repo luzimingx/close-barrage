@@ -1,2 +1,3 @@
 # close-barrage
-close barrage auto.
+支持平台：斗鱼
+功能：自动关闭弹幕、自动切换最高画质、自动删除礼物工具栏
