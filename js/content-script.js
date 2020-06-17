@@ -62,7 +62,7 @@ function createFullScreenButton() {
     var layout = getElement(selectors.layout[0]);
     layout.style.position = 'relative';
     var button = createElement('div', {
-        style: 'width: 80px;height:80px;background:red;position:absolute;top:0;left:0'
+        style: 'width: 80px;height:80px;position:absolute;top:0;left:0'
     });
     button.addEventListener('click', function() {
         click(selectors.fullScreen, dom => dom.click());
