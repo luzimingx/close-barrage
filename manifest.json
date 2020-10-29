@@ -1,24 +1,24 @@
 {
     "manifest_version": 2,
     "name": "close-barrage",
-    "version": "0.1",
+    "version": "0.2",
     "description": "close barrage auto",
     "icons": {
-        "16": "img/icon.jpg",
-        "48": "img/icon.jpg",
-        "128": "img/icon.jpg"
+        "16": "img/icon.png",
+        "48": "img/icon.png",
+        "128": "img/icon.png"
     },
     "background": {
         "scripts": ["js/background.js"]
     },
     "browser_action": {
-        "default_icon": "img/icon.jpg",
+        "default_icon": "img/icon.png",
         "default_title": "close-barrage",
         "default_popup": "html/popup.html"
     },
     "content_scripts": [
         {
-            "matches": ["*://*.douyu.com/*", "*://*.huya.com/*", "*://*.huomao.com/*"],
+            "matches": ["*://*.douyu.com/*", "*://*.huya.com/*"],
             "js": ["js/content-script.js"],
             "run_at": "document_end"
         }
