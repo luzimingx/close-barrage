@@ -38,7 +38,7 @@ createButton({
     style: 'width: 50%;height:50%;position:absolute;top:0;left:0;',
     realButton: 'fullScreen'
 });
-// 在右上角创建全屏按钮
+// 在右上角创建网页全屏按钮
 createButton({
     style: 'width: 50%;height:50%;position:absolute;top:0;right:0;',
     realButton: 'pageScreen',
@@ -46,11 +46,11 @@ createButton({
         click(selectors.asideToggle, dom => dom.click());
     },
 });
-// 在右下角创建退出全屏按钮
-createButton({
-    style: 'width: 50%;height:50%;position:absolute;bottom:0;right:0;',
-    realButton: 'quitPageScreen'
-});
+// // 在右下角创建退出网页全屏按钮
+// createButton({
+//     style: 'width: 50%;height:25%;position:absolute;top:50%;right:0;',
+//     realButton: 'quitPageScreen'
+// });
 // 隐藏礼物工具栏
 click(selectors.toolbar, dom => dom.parentNode.removeChild(dom));
 // 关闭弹幕
