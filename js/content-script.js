@@ -1,5 +1,7 @@
 var host = location.host.split('.')[1],
     hosts = ['douyu', 'huya'];
+// 将信息发送到 background
+chrome.runtime.sendMessage({ type: 'host', value: host }, function(response) {});
 
 var selectors = {
     douyu: {
@@ -11,6 +13,8 @@ var selectors = {
         quitPageScreen: ['\[title="退出网页全屏"\]'], // 退出网页全屏按钮
         asideToggle: ['.layout-Player-asidetoggleButton'], // 网页全屏后 收起边栏按钮
         quality: ['\[value="画质 "\]', 'nextElementSibling'], // 清晰度按钮
+        anthorList: '.layout-Cover-item',
+        anthorName: '.DyListCover-userName'
     },
     huya: {
         layout: ['.room-player-wrap'],
@@ -21,7 +25,9 @@ var selectors = {
         pageScreen: ['\[title="剧场模式"\]'],
         quitPageScreen: ['\[title="退出剧场"\]'],
         asideToggle: ['#player-fullpage-right-btn'],
-        quality: ['.player-videotype-list']
+        quality: ['.player-videotype-list'],
+        anthorList: '.game-live-item',
+        anthorName: '.nick'
     },
     // huomao: {
     //     layout: ['#playing-box-root'],
@@ -59,6 +65,8 @@ click(selectors.barrage, dom => dom.click());
 click(selectors.quality, dom => {
     dom && dom.firstElementChild.click();
 });
+// 删除主播
+setTimeout(deleteAnchor, 6000);
 
 function click(selector, suc, fail, maxTime) {
     var time = 0,
@@ -96,6 +104,26 @@ function createButton(options) {
     });
     layout.appendChild(button);
 }
+
+// 删除主播
+function deleteAnchor() {
+    var anchors = [];
+    var key = host + 'shield';
+    chrome.storage.local.get(key, function(obj) {
+        anchors = obj[key];
+        var lists = document.querySelectorAll(selectors.anthorList);
+        lists = [].slice.call(lists, 0);
+        if (!lists.length) return;
+        lists.forEach(function(list) {
+            var anchor = list.querySelector(selectors.anthorName);
+            anchor = anchor && anchor.innerHTML;
+            if (includes(anchors, anchor)) {
+                list.parentNode.removeChild(list);
+            }
+        });
+    });
+}
+
 // 创建dom
 function createElement(tag, attrs) {
     var elem = document.createElement(tag);
@@ -107,4 +135,12 @@ function createElement(tag, attrs) {
 // 获取dom
 function getElement(selector) {
     return document.querySelector(selector);
+}
+// 是否包含某个元素
+function includes(array, item) {
+    if (!array.length || !item) return false;
+    for (var i = 0, l = array.length; i < l; i++) {
+        if (array[i] === item) return true;
+    }
+    return false;
 }

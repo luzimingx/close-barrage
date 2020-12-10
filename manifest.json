@@ -23,7 +23,9 @@
             "run_at": "document_end"
         }
     ],
-    "permissions": [],
+    "permissions": [
+        "storage"
+    ],
     "homepage_url": "https://github.com/luzimingx/close-barrage",
     "commands": {
         "_execute_browser_action": {
